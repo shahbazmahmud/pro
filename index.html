@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be Mine?</title>
+  <style>
+    /* Basic Styles */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      background-size: 400% 400%;
+      animation: gradientMove 5s infinite alternate;
+      overflow: hidden;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: white;
+      text-align: center;
+      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+      width: 200px;
+      max-width: 90%;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    .yes {
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+      color: white;
+      animation: pulse 1.5s infinite;
+    }
+
+    .yes:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0px 0px 10px rgba(255, 100, 150, 0.5); }
+      50% { box-shadow: 0px 0px 20px rgba(255, 100, 150, 0.8); }
+    }
+
+    .no {
+      background: linear-gradient(90deg, #ff6a6a, #ee9ca7);
+      color: white;
+      position: absolute;
+    }
+
+    .no:hover {
+      transform: translate(0px, 0px) rotate(10deg);
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: pink;
+      animation: float 3s infinite ease-in-out;
+      clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 50% 80%, 20% 100%, 0% 40%);
+    }
+
+    .heart:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+    .heart:nth-child(2) { top: 30%; left: 70%; animation-delay: 1s; }
+    .heart:nth-child(3) { top: 60%; left: 50%; animation-delay: 2s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Will You Be Mine? 💕</h1>
+  <div class="buttons">
+    <button class="yes" onclick="handleYesClick()">Yes</button>
+    <button class="no" id="noButton">No</button>
+  </div>
+
+  <!-- Floating Hearts -->
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <script>
+    const noButton = document.getElementById("noButton");
+
+    // Function to handle the "Yes" button click
+    function handleYesClick() {
+      document.body.innerHTML = `
+        <h1 style="color: #fff; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); font-size: 2rem; text-align: center;">
+          Yayy! 💖 You said Yes!🥳
+        </h1>
+        <p style="font-size: 1.2rem; color: #fff; text-align: center;">Hi Cutie ☺️
+      `;
+    }
+
+    // Function to make the "No" button run away
+    noButton.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    });
+
+    // Set the "No" button's initial position
+    noButton.style.position = "absolute";
+    noButton.style.left = "50%";
+    noButton.style.top = "50%";
+    noButton.style.transform = "translate(-50%, -50%)";
+  </script>
+</body>
+</html>
